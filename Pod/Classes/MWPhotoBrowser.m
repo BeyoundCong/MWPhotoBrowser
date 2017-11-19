@@ -190,9 +190,21 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         [self.view addGestureRecognizer:swipeGesture];
     }
     
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+    [back setFrame:CGRectMake(0, 2, 52, 30)];
+    [back setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+    back.imageEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
+    [back addTarget:self action:@selector(leftBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:back];
+    self.navigationItem.leftBarButtonItem = barButton;
+    
 	// Super
     [super viewDidLoad];
 	
+}
+
+- (void)leftBtnAction {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)performLayout {
