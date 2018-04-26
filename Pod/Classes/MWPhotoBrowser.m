@@ -220,7 +220,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     // Navigation buttons
     if ([self.navigationController.viewControllers objectAtIndex:0] == self) {
         // We're first on stack so show done button
-        _doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonPressed:)];
+        _doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"返回", nil) style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonPressed:)];
         // Set appearance
         [_doneButton setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
         [_doneButton setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
@@ -1568,23 +1568,24 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (void)doneButtonPressed:(id)sender {
     // Only if we're modal and there's a done button
     if (_doneButton) {
+        [self.navigationController popViewControllerAnimated:YES];
         // See if we actually just want to show/hide grid
-        if (self.enableGrid) {
-            if (self.startOnGrid && !_gridController) {
-                [self showGrid:YES];
-                return;
-            } else if (!self.startOnGrid && _gridController) {
-                [self hideGrid];
-                return;
-            }
-        }
-        // Dismiss view controller
-        if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:)]) {
-            // Call delegate method and let them dismiss us
-            [_delegate photoBrowserDidFinishModalPresentation:self];
-        } else  {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+//        if (self.enableGrid) {
+//            if (self.startOnGrid && !_gridController) {
+//                [self showGrid:YES];
+//                return;
+//            } else if (!self.startOnGrid && _gridController) {
+//                [self hideGrid];
+//                return;
+//            }
+//        }
+//        // Dismiss view controller
+//        if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:)]) {
+//            // Call delegate method and let them dismiss us
+//            [_delegate photoBrowserDidFinishModalPresentation:self];
+//        } else  {
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//        }
     }
 }
 
